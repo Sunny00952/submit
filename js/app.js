@@ -78,26 +78,33 @@ class PDFViewer {
         
         // Wheel zoom and page navigation
         document.addEventListener('wheel', (e) => {
+            // Only act when scrolling over the viewer container (not the whole page)
+            if (!e.target.closest('.viewer-container')) return;
+
+            // Zoom with Ctrl+Wheel
             if (e.ctrlKey || e.metaKey) {
-                // Zoom with Ctrl+Wheel
                 e.preventDefault();
                 if (e.deltaY < 0) {
                     this.zoomIn();
                 } else {
                     this.zoomOut();
                 }
-            } else {
-                // Page navigation with scroll wheel (throttled)
-                const now = Date.now();
-                if (now - this.lastWheelTime >= this.wheelThrottle) {
-                    e.preventDefault();
-                    if (e.deltaY > 0) {
-                        this.nextPage();
-                    } else {
-                        this.prevPage();
-                    }
-                    this.lastWheelTime = now;
+                return;
+            }
+
+            // Page navigation with scroll wheel (throttled + delta threshold)
+            const now = Date.now();
+            const threshold = 60; // require larger scroll movement to trigger page change
+            if (Math.abs(e.deltaY) < threshold) return;
+
+            if (now - this.lastWheelTime >= this.wheelThrottle) {
+                e.preventDefault();
+                if (e.deltaY > 0) {
+                    this.nextPage();
+                } else {
+                    this.prevPage();
                 }
+                this.lastWheelTime = now;
             }
         }, { passive: false });
     }
