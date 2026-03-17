@@ -92,19 +92,25 @@ class PDFViewer {
                 return;
             }
 
-            // Page navigation with scroll wheel (throttled + delta threshold)
+            // Only switch page when at scroll boundary (bottom/top)
             const now = Date.now();
             const threshold = 60; // require larger scroll movement to trigger page change
             if (Math.abs(e.deltaY) < threshold) return;
 
+            const container = this.pdfContainer;
+            const atBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 2;
+            const atTop = container.scrollTop <= 2;
+
             if (now - this.lastWheelTime >= this.wheelThrottle) {
-                e.preventDefault();
-                if (e.deltaY > 0) {
+                if (e.deltaY > 0 && atBottom) {
+                    e.preventDefault();
                     this.nextPage();
-                } else {
+                    this.lastWheelTime = now;
+                } else if (e.deltaY < 0 && atTop) {
+                    e.preventDefault();
                     this.prevPage();
+                    this.lastWheelTime = now;
                 }
-                this.lastWheelTime = now;
             }
         }, { passive: false });
     }
