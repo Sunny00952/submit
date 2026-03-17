@@ -1,0 +1,30 @@
+{
+  "name": "pdf-viewer-web",
+  "version": "1.0.0",
+  "description": "A PDF preview and download web application, deployable on GitHub Pages",
+  "main": "index.html",
+  "scripts": {
+    "serve": "python -m http.server 8000",
+    "serve:py2": "python -m SimpleHTTPServer 8000",
+    "start": "http-server"
+  },
+  "keywords": [
+    "pdf",
+    "viewer",
+    "web",
+    "github-pages",
+    "pdfjs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "pdfjs-dist": "^3.11.174"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/yourrepo.git"
+  }
+}

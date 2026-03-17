@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Viewer & Download</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>PDF Viewer & Downloader</h1>
+                <p>View and download PDF documents</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="viewer-section">
+                <!-- Toolbar -->
+                <div class="toolbar">
+                    <div class="toolbar-left">
+                        <button id="prevBtn" class="btn btn-icon" title="Previous page">
+                            <span>❮</span>
+                        </button>
+                        <div class="page-info">
+                            <input type="number" id="pageInput" min="1" value="1">
+                            <span>of <span id="totalPages">0</span></span>
+                        </div>
+                        <button id="nextBtn" class="btn btn-icon" title="Next page">
+                            <span>❯</span>
+                        </button>
+                    </div>
+                    <div class="toolbar-center">
+                        <button id="zoomOutBtn" class="btn btn-icon" title="Zoom out">
+                            <span>−</span>
+                        </button>
+                        <select id="zoomLevel" class="zoom-select">
+                            <option value="50">50%</option>
+                            <option value="75">75%</option>
+                            <option value="100" selected>100%</option>
+                            <option value="125">125%</option>
+                            <option value="150">150%</option>
+                            <option value="200">200%</option>
+                            <option value="page-fit">Page fit</option>
+                            <option value="page-width">Page width</option>
+                        </select>
+                        <button id="zoomInBtn" class="btn btn-icon" title="Zoom in">
+                            <span>+</span>
+                        </button>
+                    </div>
+                    <div class="toolbar-right">
+                        <button id="downloadBtn" class="btn" title="Download PDF">
+                            <span>⬇</span> Download
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Viewer -->
+                <div class="viewer-container">
+                    <div id="viewer" class="pdf-viewer">
+                        <canvas id="canvas" class="pdf-canvas"></canvas>
+                    </div>
+                    <div class="viewer-status" id="viewerStatus"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by PDF.js | <a href="https://github.com" target="_blank">GitHub Pages</a></p>
+        </footer>
+    </div>
+
+    <!-- PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    
+    <!-- Application script -->
+    <script src="js/app.js"></script>
+</body>
+</html>
