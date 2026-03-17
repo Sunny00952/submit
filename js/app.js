@@ -17,6 +17,8 @@ class PDFViewer {
         this.isDragging = false;
         this.startX = 0;
         this.startY = 0;
+        this.lastWheelTime = 0;
+        this.wheelThrottle = 200; // milliseconds between page changes
         
         this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext('2d');
@@ -74,17 +76,30 @@ class PDFViewer {
         this.canvas.addEventListener('mouseup', () => this.endPan());
         this.canvas.addEventListener('mouseleave', () => this.endPan());
         
-        // Wheel zoom
+        // Wheel zoom and page navigation
         document.addEventListener('wheel', (e) => {
             if (e.ctrlKey || e.metaKey) {
+                // Zoom with Ctrl+Wheel
                 e.preventDefault();
                 if (e.deltaY < 0) {
                     this.zoomIn();
                 } else {
                     this.zoomOut();
                 }
+            } else {
+                // Page navigation with scroll wheel (throttled)
+                const now = Date.now();
+                if (now - this.lastWheelTime >= this.wheelThrottle) {
+                    e.preventDefault();
+                    if (e.deltaY > 0) {
+                        this.nextPage();
+                    } else {
+                        this.prevPage();
+                    }
+                    this.lastWheelTime = now;
+                }
             }
-        });
+        }, { passive: false });
     }
 
     async loadDocumentList() {
