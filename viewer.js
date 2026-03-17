@@ -11786,7 +11786,10 @@ class Autolinker {
       if (url.startsWith("www.") || url.startsWith("http://") || url.startsWith("https://")) {
         raw = url;
       } else if (emailDomain) {
-        const hostname = URL.parse(`http://${emailDomain}`)?.hostname;
+        let hostname = null;
+        try {
+          hostname = new URL(`http://${emailDomain}`).hostname;
+        } catch {}
         if (!hostname) {
           continue;
         }
@@ -19227,11 +19230,17 @@ PDFPrintServiceFactory.initGlobals(PDFViewerApplication);
     if (!file) {
       return;
     }
-    const viewerOrigin = URL.parse(window.location)?.origin || "null";
+    let viewerOrigin = "null";
+    try {
+      viewerOrigin = new URL(window.location.href).origin || "null";
+    } catch {}
     if (HOSTED_VIEWER_ORIGINS.has(viewerOrigin)) {
       return;
     }
-    const fileOrigin = URL.parse(file, window.location)?.origin;
+    let fileOrigin = null;
+    try {
+      fileOrigin = new URL(file, window.location.href).origin;
+    } catch {}
     if (fileOrigin === viewerOrigin) {
       return;
     }
