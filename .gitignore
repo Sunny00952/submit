@@ -6,6 +6,11 @@ yarn.lock
 # Build output
 dist/
 build/
+!build/
+build/*
+!build/pdf.js
+!build/pdf.worker.js
+!build/pdf.sandbox.js
 
 # Temporary files
 *.tmp
