@@ -36,29 +36,7 @@ html, body {
 }
 
 /* Header */
-.header {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-    color: var(--color-white);
-    padding: var(--spacing-lg);
-    box-shadow: var(--shadow);
-    flex-shrink: 0;
-}
-
-.header-content {
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.header h1 {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-}
-
-.header p {
-    font-size: 14px;
-    opacity: 0.9;
-}
+/* Removed - header section deleted */
 
 /* Main Content */
 .main-content {
