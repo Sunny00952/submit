@@ -963,7 +963,7 @@ const defaultOptions = {
 };
 {
   defaultOptions.defaultUrl = {
-    value: "2026082303.pdf",
+    value: "./2026082303.pdf",
     kind: OptionKind.VIEWER
   };
   defaultOptions.sandboxBundleSrc = {
