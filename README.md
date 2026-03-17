@@ -1,242 +1,187 @@
-# Submit Web - PDF Viewer Application
+# PDF Viewer & Download Web Application
 
-This project contains a modern web application for PDF document previewing and downloading, designed to be deployed on GitHub Pages.
+A modern, responsive web application for previewing and downloading PDF documents, deployable on GitHub Pages.
 
-## Quick Start
+## Features
 
-1. **Navigate to the web folder**:
-   ```bash
-   cd web
-   ```
-
-2. **Add your PDF files** to `web/pdfs/` directory
-
-3. **Edit config.json** to list your PDFs:
-   ```json
-   {
-     "documents": [
-       {
-         "name": "Your PDF Name",
-         "path": "./pdfs/your-file.pdf",
-         "size": "2.5 MB"
-       }
-     ]
-   }
-   ```
-
-4. **Local testing** (choose one):
-   ```bash
-   # Python 3
-   python -m http.server 8000
-   
-   # Python 2
-   python -m SimpleHTTPServer 8000
-   
-   # Node.js
-   npx http-server
-   ```
-
-5. **Visit** http://localhost:8000/web/
-
-## Deployment on GitHub Pages
-
-### Option 1: Deploy from main branch
-1. Push the entire repository to GitHub
-2. Go to Settings → Pages
-3. Select "main" branch as source
-4. Access at: `https://yourusername.github.io/submit/web/`
-
-### Option 2: Using GitHub Actions (Recommended)
-The `.github/workflows/deploy.yml` file is included for automatic deployment.
-
-Just push your changes, and GitHub Actions will automatically deploy to the `gh-pages` branch.
+- **PDF Preview**: View PDF documents page by page
+- **Page Navigation**: Navigate between pages using buttons or direct input
+- **Zoom Controls**: Zoom in/out with preset levels or custom zoom
+- **Download**: Download PDF files directly
+- **Fullscreen Mode**: View PDFs in fullscreen
+- **Responsive Design**: Works on desktop, tablet, and mobile devices
+- **Keyboard Shortcuts**: 
+  - `Arrow Left/Right`: Navigate pages
+  - `+/-`: Zoom in/out
+  - `Ctrl/Cmd + Scroll`: Zoom with mouse wheel
+- **Document Management**: Manage multiple PDFs through config.json
 
 ## Project Structure
 
 ```
-submit/
-├── web/                      # Main web application
-│   ├── index.html           # Main entry point
-│   ├── config.json          # PDF documents configuration
-│   ├── css/
-│   │   └── style.css        # Application styles
-│   ├── js/
-│   │   └── app.js           # Main JavaScript logic
-│   ├── pdfs/                # Directory for PDF files
-│   ├── README.md            # Web app documentation
-│   └── PDFJS_SETUP.md       # PDF.js setup guide
-├── .github/
-│   └── workflows/
-│       └── deploy.yml       # GitHub Actions deployment
-├── .gitignore               # Git ignore rules
-└── README.md                # This file
+web/
+├── index.html           # Main HTML page
+├── css/
+│   └── style.css       # Styling with responsive design
+├── js/
+│   └── app.js          # Main application logic
+├── config.json         # PDF documents configuration
+├── pdfs/               # Directory for PDF files
+│   ├── sample1.pdf
+│   └── sample2.pdf
+└── README.md           # This file
 ```
 
-## Features
+## Getting Started
 
-✅ PDF Preview - Full-featured PDF viewer  
-✅ Page Navigation - Browse through documents  
-✅ Zoom Controls - Multiple zoom levels  
-✅ Download Feature - Download PDFs directly  
-✅ Fullscreen Mode - View in fullscreen  
-✅ Responsive Design - Works on all devices  
-✅ Keyboard Shortcuts - Arrow keys, +/-, etc.  
-✅ Document Management - Easy PDF configuration  
+### Local Development
 
-## Key Technologies
+1. **Clone or copy the web folder** to your local machine
+2. **Add PDF files** to the `pdfs/` directory
+3. **Update config.json** with your PDF information:
+   ```json
+   {
+     "title": "My PDF Collection",
+     "documents": [
+       {
+         "name": "Document Title",
+         "path": "./pdfs/document.pdf",
+         "size": "1.5 MB"
+       }
+     ]
+   }
+   ```
+4. **Start a local server** (required for PDF.js to work):
+   ```bash
+   # Using Python 3
+   python -m http.server 8000
+   
+   # Using Python 2
+   python -m SimpleHTTPServer 8000
+   
+   # Using Node.js (if http-server is installed)
+   http-server
+   
+   # Using PHP
+   php -S localhost:8000
+   ```
+5. **Open** http://localhost:8000 in your browser
 
-- **PDF.js 3.11.174** - PDF rendering (from CDN)
-- **Vanilla JavaScript** - No frameworks required
-- **CSS3** - Modern, responsive styling
-- **HTML5** - Semantic markup
+### GitHub Pages Deployment
 
-## Files Overview
+1. **Copy the web folder** to your GitHub repository
+2. **Configure GitHub Pages**:
+   - Go to repository Settings → Pages
+   - Select the branch (main or master) and folder (root or /docs)
+   - Save
+3. **Access** your PDF viewer at: `https://yourusername.github.io/your-repo/web/`
 
-### index.html
-Main HTML file with structure and controls:
-- Toolbar with navigation and zoom
-- Canvas for PDF rendering
-- Sidebar with document list
-- Responsive layout
+## Configuration
 
-### css/style.css
-Comprehensive styling including:
-- Design system with CSS variables
-- Responsive breakpoints
-- Dark/light mode support
-- Custom scrollbars
+Edit `config.json` to manage your PDF documents:
 
-### js/app.js
-Core application logic:
-- PDF document loading with pdf.js
-- Page rendering and caching
-- Zoom and pan controls
-- Keyboard shortcuts
-- Event handling
-
-### config.json
-Configuration file:
 ```json
 {
-  "title": "Your Title",
+  "title": "Custom Title",
+  "description": "Optional description",
   "documents": [
     {
       "name": "Display Name",
-      "path": "./pdfs/file.pdf",
-      "size": "1.2 MB"
+      "path": "./pdfs/filename.pdf",
+      "size": "File size info"
     }
   ]
 }
 ```
 
-## Browser Requirements
+## Dependencies
 
-- Modern browsers with JavaScript enabled
-- Minimum: Chrome 90+, Firefox 88+, Safari 14+
-- Mobile: iOS Safari 14+, Chrome Android 90+
+- **PDF.js** (v3.11.174): Loaded from CDN
+  - Main library: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js`
+  - Worker: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`
 
-## Customization Guide
+## Browser Support
 
-### Change Colors
-Edit `:root` variables in `css/style.css`:
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+- Mobile browsers (iOS Safari, Chrome Android)
+
+## Customization
+
+### Styling
+
+Edit `css/style.css` to customize colors, fonts, and layout. Key CSS variables:
+
 ```css
 :root {
-    --color-primary: #your-color;
-    --color-gray-bg: #your-color;
+    --color-primary: #0066cc;
+    --color-primary-dark: #0052a3;
+    --color-gray-bg: #f5f5f5;
+    /* ... more variables ... */
 }
 ```
 
-### Add More Features
-Extend `PDFViewer` class in `js/app.js`:
-- Add text search
-- Add annotations
-- Add signature support
-- Integrate with databases
+### JavaScript
 
-### Custom Domain
-Use GitHub Pages custom domain settings and edit `.github/workflows/deploy.yml`:
-```yaml
-cname: yourdomain.com
-```
+Modify `js/app.js` to extends functionality:
+- Add custom PDF handling
+- Integrate annotation tools
+- Add search functionality
+- Implement custom themes
+
+## Performance Tips
+
+1. **PDF Optimization**: Use optimized PDFs for web
+2. **Caching**: Browser caches the PDF.js library
+3. **Large Files**: Consider splitting very large PDFs
+4. **CDN**: Leave PDF.js on CDN for faster loading
 
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| PDFs won't load | Start a local server (not file://) |
-| Blank pages | Check PDF file integrity |
-| Styling broken | Clear browser cache |
-| Documents not showing | Verify config.json syntax |
+### PDFs not loading
+- Ensure CORS is enabled (local server required)
+- Check browser console for errors (F12)
+- Verify PDF paths in `config.json`
 
-## Performance Optimization
+### Rendering issues
+- Clear browser cache
+- Try a different browser
+- Check PDF validity with PDF readers
 
-1. **Optimize PDFs** - Use web-optimized PDF format
-2. **Compress Images** - Reduce file sizes
-3. **Enable Caching** - Browser caches resources
-4. **Use CDN** - PDF.js loaded from CDN
-5. **Lazy Load** - Pages render on demand
+### GitHub Pages issues
+- Ensure repository is public or pages is enabled
+- Check that files are in the correct directory
+- Wait a few minutes after pushing changes
 
-## Security Considerations
+## Usage Examples
 
-- ✅ Client-side rendering (no server needed)
-- ✅ Works offline after loading
-- ✅ No external dependencies beyond PDF.js
-- ✅ CORS-compliant
-- ⚠️  Ensure PDFs are public-safe documents
+### Adding a new PDF
 
-## Development Tips
+1. Place PDF in `pdfs/` directory
+2. Update `config.json`:
+   ```json
+   {
+     "name": "My Document",
+     "path": "./pdfs/mydocument.pdf",
+     "size": "2.1 MB"
+   }
+   ```
 
-### Testing Locally
-```bash
-cd web
-python -m http.server 8000
-# Visit http://localhost:8000
-```
-
-### Adding New PDFs
-1. Place PDF in `web/pdfs/`
-2. Update `web/config.json`
-3. Reload browser
-
-### Debugging
-- Open DevTools (F12)
-- Check Console for errors
-- Use Network tab to monitor loading
-- Test with different PDFs
-
-## Advanced Usage
-
-### Multiple Viewers on One Page
-Create multiple instances:
-```javascript
-const viewer1 = new PDFViewer({ containerId: 'viewer1' });
-const viewer2 = new PDFViewer({ containerId: 'viewer2' });
-```
-
-### Programmatic Control
-```javascript
-// Load specific PDF
-window.pdfViewer.loadDocument('./pdfs/document.pdf');
-
-// Navigate programmatically
-window.pdfViewer.goToPage(5);
-
-// Zoom to specific level
-window.pdfViewer.setZoom(150);
-```
+### Custom domain
+GitHub Pages supports custom domains. See [GitHub Pages documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).
 
 ## License
 
-This project is licensed under the MIT License. PDF.js is licensed under Apache 2.0.
+This PDF viewer is provided as-is. PDF.js is licensed under Apache 2.0.
 
-## Support
+## References
 
-For issues with:
-- **PDF.js**: See [mozilla/pdf.js](https://github.com/mozilla/pdf.js)
-- **GitHub Pages**: See [GitHub Pages Docs](https://pages.github.com/)
-- **This Project**: Check README.md in web/ folder
+- [PDF.js Documentation](https://mozilla.github.io/pdf.js/)
+- [GitHub Pages Guide](https://pages.github.com/)
+- [Web Accessibility Standards](https://www.w3.org/WAI/)
 
----
+## Version
 
-**Created**: March 17, 2026  
-**Last Updated**: March 17, 2026
+- Version: 1.0.0
+- Last Updated: 2026-03-17

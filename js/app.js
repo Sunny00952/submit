@@ -91,27 +91,14 @@ class PDFViewer {
         try {
             this.showStatus('Loading PDF...');
             
-            // Direct PDF path for GitHub Pages
+            // Direct PDF path
             const pdfPath = './pdfs/submit.pdf';
             
-            try {
-                // Try to load from config.json
-                const response = await fetch('./config.json');
-                const config = await response.json();
-                if (config.documents && config.documents.length > 0) {
-                    await this.loadDocument(config.documents[0].path);
-                    return;
-                }
-            } catch (e) {
-                // Fallback to direct path
-                console.log('Config.json not found, using default path');
-            }
-            
-            // Fallback to direct PDF path
+            // Load PDF directly
             await this.loadDocument(pdfPath);
         } catch (error) {
             console.error('Error loading PDF:', error);
-            this.showStatus('Error loading PDF');
+            this.showStatus('Error loading PDF: ' + error.message);
         }
     }
 
@@ -251,15 +238,7 @@ class PDFViewer {
             return;
         }
         
-        // Get the current document URL or create a download
-        const links = document.querySelectorAll('a[href$=".pdf"]');
-        if (links.length > 0) {
-            const link = document.createElement('a');
-            link.href = links[0].href;
-            link.download = '';
-            link.click();
-        }
-    }Create download link from config
+        // Create download link from config
         const link = document.createElement('a');
         link.href = './pdfs/submit.pdf';
         link.download = 'document.pdf';
@@ -267,8 +246,14 @@ class PDFViewer {
     }
 
     toggleFullscreen() {
-        // Fullscreen functionality removed for single document view   this.canvas.style.cursor = 'grabbing';
-        }
+        // Fullscreen functionality removed for single document view
+    }
+
+    startPan(e) {
+        this.isDragging = true;
+        this.startX = e.clientX;
+        this.startY = e.clientY;
+        this.canvas.style.cursor = 'grabbing';
     }
 
     pan(e) {
