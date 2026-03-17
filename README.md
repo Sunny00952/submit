@@ -1,53 +1,102 @@
-# PDF Viewer & Download Web Application
+# PDF Viewer Web Application
 
-A modern, responsive web application for previewing and downloading PDF documents, deployable on GitHub Pages.
+A comprehensive PDF viewer web application inspired by PDF.js, featuring a complete toolbar, sidebar navigation, find functionality, and editor tools. Deployable on GitHub Pages.
 
 ## Features
 
-- **PDF Preview**: View PDF documents page by page
-- **Page Navigation**: Navigate between pages using buttons or direct input
-- **Zoom Controls**: Zoom in/out with preset levels or custom zoom
-- **Download**: Download PDF files directly
-- **Fullscreen Mode**: View PDFs in fullscreen
-- **Responsive Design**: Works on desktop, tablet, and mobile devices
-- **Keyboard Shortcuts**: 
+### Core PDF Viewing
+- **PDF Rendering**: High-quality PDF rendering using PDF.js
+- **Page Navigation**: Navigate between pages with buttons, input field, or keyboard shortcuts
+- **Zoom Controls**: Multiple zoom levels including auto-fit, page width, and custom scaling
+- **Download & Print**: Download PDFs or print directly from the browser
+
+### Advanced Features
+- **Sidebar Navigation**: Toggle sidebar with thumbnails, outlines, attachments, and layers
+- **Find in Document**: Search text within PDFs with highlighting and navigation
+- **Thumbnails View**: Visual page navigation with thumbnail previews
+- **Secondary Toolbar**: Additional tools including first/last page, rotation, and cursor modes
+
+### User Interface
+- **Complete Toolbar**: Full-featured toolbar matching PDF.js viewer design
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **Keyboard Shortcuts**:
   - `Arrow Left/Right`: Navigate pages
   - `+/-`: Zoom in/out
-  - `Ctrl/Cmd + Scroll`: Zoom with mouse wheel
-- **Document Management**: Manage multiple PDFs through config.json
+  - `Ctrl+F`: Open find bar
+  - `Escape`: Close dropdowns
+- **Accessibility**: Proper ARIA labels and keyboard navigation support
+
+### Editor Tools (UI Ready)
+- **Highlight Tool**: Text highlighting interface
+- **Free Text Tool**: Add text annotations
+- **Ink Tool**: Draw freehand annotations
+- **Signature Tool**: Add signatures (UI framework ready)
 
 ## Project Structure
 
 ```
-web/
-├── index.html           # Main HTML page
+submit/
+├── index.html           # Main HTML page with complete viewer UI
 ├── css/
-│   └── style.css       # Styling with responsive design
+│   └── style.css       # PDF.js-inspired styling
 ├── js/
-│   └── app.js          # Main application logic
-├── config.json         # PDF documents configuration
+│   └── app.js          # Enhanced application logic
+├── config.json         # Configuration file
 ├── pdfs/               # Directory for PDF files
-│   ├── sample1.pdf
-│   └── sample2.pdf
-└── README.md           # This file
+│   └── submit.pdf      # Main PDF document
+└── README.md           # This documentation
 ```
 
 ## Getting Started
 
 ### Local Development
 
-1. **Clone or copy the web folder** to your local machine
-2. **Add PDF files** to the `pdfs/` directory
-3. **Update config.json** with your PDF information:
-   ```json
-   {
-     "title": "My PDF Collection",
-     "documents": [
-       {
-         "name": "Document Title",
-         "path": "./pdfs/document.pdf",
-         "size": "1.5 MB"
-       }
+1. **Serve the application**:
+   ```bash
+   cd submit
+   python -m http.server 8000
+   ```
+   Then open `http://localhost:8000` in your browser
+
+2. **Add your PDF**: Place your PDF file in the `pdfs/` directory and update the path in `js/app.js`
+
+3. **Customize**: Modify `config.json` for additional configuration options
+
+### GitHub Pages Deployment
+
+1. **Upload to GitHub**: Push the `submit/` folder contents to a GitHub repository
+2. **Enable Pages**: Go to repository Settings → Pages → Select main branch
+3. **Access**: Your viewer will be available at `https://username.github.io/repository/`
+
+## Browser Support
+
+- Chrome 60+
+- Firefox 55+
+- Safari 12+
+- Edge 79+
+
+## Dependencies
+
+- **PDF.js**: For PDF rendering (loaded from CDN)
+- **No build process required**: Pure HTML/CSS/JavaScript
+
+## Customization
+
+### Adding New PDFs
+Update the PDF path in `js/app.js`:
+```javascript
+const pdfPath = './pdfs/your-document.pdf';
+```
+
+### Styling
+Modify `css/style.css` to customize the appearance while maintaining the PDF.js look and feel.
+
+### Features
+The application includes UI for advanced features like annotations and form filling. Implement the backend functionality as needed for your use case.
+
+## License
+
+This project is designed to work with PDF.js and follows similar licensing terms.
      ]
    }
    ```
